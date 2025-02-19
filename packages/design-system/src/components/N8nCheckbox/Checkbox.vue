@@ -41,7 +41,7 @@ const onLabelClick = () => {
 	<ElCheckbox
 		v-bind="$props"
 		ref="checkbox"
-		:class="['n8n-checkbox', $style.n8nCheckbox]"
+		:class="['n8n-checkbox', $style.checkbox]"
 		:disabled="disabled"
 		:indeterminate="indeterminate"
 		:model-value="modelValue"
@@ -60,18 +60,20 @@ const onLabelClick = () => {
 </template>
 
 <style lang="scss" module>
-.n8nCheckbox {
+.checkbox {
 	display: flex !important;
 	white-space: normal !important;
 	margin-bottom: var(--spacing-2xs);
 
-	span {
-		white-space: normal;
-	}
+	:global {
+		span {
+			white-space: normal;
+		}
 
-	label {
-		cursor: pointer;
-		margin-bottom: 0;
+		label {
+			cursor: pointer;
+			margin-bottom: 0;
+		}
 	}
 }
 </style>
