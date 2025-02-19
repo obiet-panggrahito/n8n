@@ -36,7 +36,7 @@ const onVisibleChange = (value: boolean) => emit('visible-change', value);
 </script>
 
 <template>
-	<span :class="$style.container" data-test-id="action-toggle" @click.stop.prevent>
+	<span :class="styles.container" data-test-id="action-toggle" @click.stop.prevent>
 		<ElDropdown
 			:placement="placement"
 			:size="size"
@@ -45,7 +45,7 @@ const onVisibleChange = (value: boolean) => emit('visible-change', value);
 			@visible-change="onVisibleChange"
 		>
 			<slot>
-				<span :class="{ [$style.button]: true, [$style[theme]]: !!theme }">
+				<span :class="[styles.button, theme && styles[theme]]">
 					<N8nIcon
 						:icon="iconOrientation === 'horizontal' ? 'ellipsis-h' : 'ellipsis-v'"
 						:size="iconSize"
@@ -63,7 +63,7 @@ const onVisibleChange = (value: boolean) => emit('visible-change', value);
 						:data-test-id="`action-${action.value}`"
 					>
 						{{ action.label }}
-						<div :class="$style.iconContainer">
+						<div :class="styles.iconContainer">
 							<N8nIcon
 								v-if="action.type === 'external-link'"
 								icon="external-link-alt"
@@ -79,7 +79,7 @@ const onVisibleChange = (value: boolean) => emit('visible-change', value);
 </template>
 
 <style lang="scss" module>
-.container > * {
+.container > :global(*) {
 	line-height: 1;
 }
 
@@ -110,7 +110,7 @@ const onVisibleChange = (value: boolean) => emit('visible-change', value);
 	display: inline;
 }
 
-li:hover .iconContainer svg {
+:global(li:hover) .iconContainer :global(svg) {
 	color: var(--color-primary-tint-1);
 }
 </style>
